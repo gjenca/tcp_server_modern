@@ -6,9 +6,6 @@ import logging
 # nastavime uroven protokolovania (logging)
 logging.basicConfig(level=logging.INFO)
 
-# vytvorime Lock
-
-lock=multiprocessing.Lock()
 
 # toto je funkcia, ktora bezi v osobitnom procese
 def handle_client(client_socket,addr,l):
@@ -48,6 +45,8 @@ s=socket.socket(socket.AF_INET,socket.SOCK_STREAM) # TCP socket
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1) # aby sme mohli ihned restartovat server
 s.bind(('',9999))
 s.listen(5)
+# vytvorime zdielany Lock
+lock=multiprocessing.Lock()
 # Vytvorime zdielany zdroj: subor data.txt
 # Vsetky procesy, ktore vytvorime budu don citat a zapisovat
 with open('data.txt','w') as f:

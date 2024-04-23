@@ -17,7 +17,7 @@ for i in range(200):
     sock.connect((args.host,args.port))
     print('connected',i)
     socks.append((sock,sock.makefile('rw',encoding='utf-8')))
-    #time.sleep(0.005)
+    time.sleep(0.005)
 
 for i,(sock,f) in enumerate(socks):
     f.write(f'ping {i}\n')
